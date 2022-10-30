@@ -11,12 +11,12 @@
  * @return {boolean}
  */
 var hasCycle = function (head) {
-  let currentNode = head;
-  let cache = [head];
-  while (currentNode?.next) {
-    if (cache.includes(currentNode.next)) return true;
-    currentNode = currentNode.next;
-    cache.push(currentNode);
+  let walker = head;
+  let runner = head;
+  while (runner && runner.next && runner.next.next) {
+    walker = walker.next;
+    runner = runner.next.next;
+    if (walker === runner) return true;
   }
   return false;
 };
