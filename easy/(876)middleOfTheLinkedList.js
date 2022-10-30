@@ -1,28 +1,21 @@
-// Given the head of a singly linked list, return the middle node of the linked list.
-
-// If there are two middle nodes, return the second middle node.
-
-// given the head of a list, contains the val and next attributes
-
-// want to return the node at the start of the back half of the list
-
-// [1, 2, 3, 4, 5] => node that has node.val = 3
-// [1, 2, 3, 4, 5, 6] => node that has node.val = 4
-
-function middleNode(head) {
-  // find the length of the list
-  let length = 1;
-  // while loop until node.next is null
-  let currentNode = head;
-  while (currentNode.next) {
-    currentNode = currentNode.next;
-    // add 1 to a length counter
-    length++;
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function (head) {
+  let walker = head;
+  let runner = head;
+  while (runner && runner.next && runner.next.next) {
+    walker = walker.next;
+    runner = runner.next.next;
   }
-  let middleNode = head;
-  // use a for loop to find the middle length / 2
-  for (let i = 1; i <= length / 2; i++) {
-    middleNode = middleNode.next;
-  }
-  return middleNode;
-}
+  if (runner.next) return walker.next;
+  return walker;
+};
